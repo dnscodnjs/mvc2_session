@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <!-- 부트스트랩 CSS 파일 링크 -->
+    <link th:href="@{/css/bootstrap.min.css}" href="../css/bootstrap.min.css" rel="stylesheet">
+    <!-- 사용자 정의 스타일 -->
+    <style>
+        .container {
+            max-width: 560px;
+        }
+
+        /* 폼 필드 오류 표시 스타일 */
+        .field-error {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>회원 가입</h2> <!-- 회원 가입을 위한 제목 -->
+    </div>
+    <h4 class="mb-3">회원 정보 입력</h4> <!-- 회원 정보 입력을 위한 부제목 -->
+    <!-- 회원 가입을 위한 폼 -->
+    <form action="" th:action th:object="${member}" method="post">
+        <!-- 전역 오류가 있는 경우 표시 -->
+        <div th:if="${#fields.hasGlobalErrors()}">
+            <!-- 전역 오류를 반복하며 표시 -->
+            <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">전체 오류 메시지</p>
+        </div>
+        <!-- 로그인 ID를 위한 입력 필드 -->
+        <div>
+            <label for="loginId">로그인 ID</label>
+            <input type="text" id="loginId" th:field="*{loginId}" class="form-control" th:errorclass="field-error">
+            <!-- 로그인 ID 필드의 오류 표시 -->
+            <div class="field-error" th:errors="*{loginId}"/>
+        </div>
+        <!-- 비밀번호를 위한 입력 필드 -->
+        <div>
+            <label for="password">비밀번호</label>
+            <input type="password" id="password" th:field="*{password}" class="form-control" th:errorclass="field-error">
+            <!-- 비밀번호 필드의 오류 표시 -->
+            <div class="field-error" th:errors="*{password}"/>
+        </div>
+        <!-- 이름을 위한 입력 필드 -->
+        <div>
+            <label for="name">이름</label>
+            <input type="text" id="name" th:field="*{name}" class="form-control" th:errorclass="field-error">
+            <!-- 이름 필드의 오류 표시 -->
+            <div class="field-error" th:errors="*{name}"/>
+        </div>
+        <hr class="my-4"> <!-- 시각적 구분을 위한 수평 선 -->
+        <!-- 폼 제출 및 회원 가입 취소를 위한 버튼 -->
+        <div class="row">
+            <div class="col">
+                <button class="w-100 btn btn-primary btn-lg" type="submit">회원 가입</button>
+            </div>
+            <div class="col">
+                <button class="w-100 btn btn-secondary btn-lg" onclick="location.href='items.html'" th:onclick="|location.href='@{/}'|" type="button">취소</button>
+            </div>
+        </div>
+    </form>
+</div> <!-- /container -->
+</body>
+</html>
